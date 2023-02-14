@@ -1,6 +1,8 @@
 MastodonPostStatus();
 
 function MastodonPostStatus() {
+    console.log(process.env);
+
     fetch('https://mastodon.social/api/v1/statuses', { 
     method: 'post', 
     headers: new Headers({
