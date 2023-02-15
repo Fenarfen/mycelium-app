@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Log;
+use Illuminate\Http\Request;
 
-class LogController extends Controller
+class sharkController extends Controller
 {
+    public function shark()
+    {
+        return view('sharks', ['animal' => 'shargndkfnjdk']);
+    }
 }
