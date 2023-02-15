@@ -6,4 +6,7 @@ use App\Model\SocialMedia;
 
 class SocialMediaController extends Controller
 {
+    public function index() {
+        return view('mastodon');
+    }
 }
