@@ -29,6 +29,10 @@ Route::middleware([
 });
 
 Route::view('/mastodon', 'mastodon');
+Route::view('/botlogin', 'bot-login');
+Route::view('/log', 'log');
+Route::view('/team-contact', 'team-contact');
+Route::view('/social-media', 'social-media');
 
 Auth::routes();
 

@@ -1,3 +1,5 @@
 <div class="container">
-    <h1>hello world</h1>
+    <?php
+    echo "<h1>fnsjns</h1>"
+    ?>
 </div>
