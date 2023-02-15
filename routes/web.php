@@ -28,11 +28,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/mastodon', 'mastodon');
-Route::view('/botlogin', 'bot-login');
-Route::view('/log', 'log');
-Route::view('/team-contact', 'team-contact');
-Route::view('/social-media', 'social-media');
+Route::get('/mastodon', [App\Http\Controllers\MastodonController::class, 'index']);
 
 Auth::routes();
 
