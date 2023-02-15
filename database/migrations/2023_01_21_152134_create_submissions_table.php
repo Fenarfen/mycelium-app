@@ -16,16 +16,16 @@ return new class extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->index();
-            $table->foreignId('team_id')->index();
+            $table->foreignId('user_id')->constrained('users')->index('submissions_user_id_index');
+            $table->foreignId('team_id')->constrained('teams')->index('submissions_team_id_index');
             $table->year('year');
             $table->string('document')->nullable();
             $table->string('document_name')->nullable();  //needed? possibly useful for data scraping purposes, its a value we get our human scrapers to colect
 
-            $table->foreignId('auditor_id')->constrained('teams')->nullable()->index();
+            $table->foreignId('auditor_id')->constrained('teams')->nullable()->index('submissions_auditor_id_index');
             $table->string('auditor_confirmation')->nullable();  //what is this?should be 'approved or confirmed by carbon accountant' - this is when a compnay states who their carbon accountant was and we are able to confirm that with their carbon accountant that their numbers are correct
 
-            $table->foreignId('carbon_accountant_id')->constrained('teams')->nullable()->index();
+            $table->foreignId('carbon_accountant_id')->constrained('teams')->nullable()->index('submissions_carbon_accountant_id_index');
             
             $table->foreignId('sector_id')->nullable()->index();
             $table->foreignId('industry_id')->nullable()->index();
@@ -76,7 +76,7 @@ return new class extends Migration
 
             $table->bigInteger('standard_id')->nullable(); //what is this? these are carbon emission standards that the calculation was produced to. most common is GHG protocol
 
-            $table->foreignId('checked_by')->constrained('users')->nullable()->index();
+            $table->foreignId('checked_by')->constrained('users')->nullable()->index('submissions_checked_by_index');
             $table->dateTime('checked_date_time')->nullable();
             $table->string('approved_by_company')->nullable();  //what is this? not sure tbh, it could be that the figures have been directly API'd by the carbon accountant which is best data performance
 
