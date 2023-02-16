@@ -28,11 +28,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/mastodon', 'mastodon');
-Route::view('/botlogin', 'bot-login');
-Route::view('/log', 'log');
-Route::view('/team-contact', 'team-contact');
-Route::view('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index']);
+
+Route::get('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index']);
+Route::get('/show/{id}', [App\Http\Controllers\SocialMediaController::class, 'show']);
+Route::get('/create', [App\Http\Controllers\SocialMediaController::class, 'create']);
 
 Auth::routes();
 
