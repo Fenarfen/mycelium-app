@@ -1,5 +1,5 @@
 <div class="container">
-    <?php
-    echo "<h1>fnsjns</h1>"
-    ?>
+    <h1>
+        <?php echo $response; ?>
+    </h1>
 </div>
