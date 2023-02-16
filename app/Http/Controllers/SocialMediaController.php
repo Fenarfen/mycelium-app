@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\TeamContact;
+use App\Traits\CreateTeamContact;
+use Illuminate\Http\Request;
 
 class SocialMediaController extends Controller
 {
-
-
+    use CreateTeamContact;
+    
     public function TwitterPostStatus()
     {
         #post request, must be json
@@ -61,11 +63,12 @@ class SocialMediaController extends Controller
         ]);
     }
 
-    public function create() {
-        $model = TeamContact::create(['team_id' => 1,
-        'handle' => 'test3', 
-        'website' => 'www.test3.com']);
+    public function create(Request $request) {
 
-        echo('contact created');
+        $this->verifyAndCreateTeamContact(
+            $request->input('team_id'),
+            $request->input('handle'),
+            $request->input('website')
+        );
     }
 }
