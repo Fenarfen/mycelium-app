@@ -1,17 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-ini_set("display_errors", 1);
-
-use App\Model\SocialMedia;
-
-class SocialMediaController extends Controller
+class TwitterController extends Controller
 {
-    public function index()
+    function index()
     {
-        return view('social-media', ['response' => $this->TwitterPostStatus()]);
+        return view('twitter', ['response' => $this->TwitterPostStatus()]);
     }
 
     public function TwitterPostStatus()
@@ -52,7 +47,7 @@ class SocialMediaController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POSTFIELDS => '{
-                "text": "Hello World from mycelium-app4!"
+                "text": "Hello World from mycelium-app5!"
             }',
             CURLOPT_HTTPHEADER => array(
                 'Authorization: OAuth oauth_consumer_key="' . $twitter_test_consumer . '",oauth_token="' . $twitter_test_access_token . '",oauth_signature_method="HMAC-SHA1",oauth_timestamp="' . time() . '",oauth_nonce="' . time() . '",oauth_version="1.0",oauth_signature="' . $encodedSignature . '"',
@@ -61,15 +56,9 @@ class SocialMediaController extends Controller
         ));
 
         $response = curl_exec($curl);
-        echo $response;
         curl_close($curl);
 
-        if (isset($response['data']))
-            return "success";
-        else if (isset($response['error']))
-            return "failure";
-        else
-            return "Error: no response";
+        return $response;
     }
 
     function buildString($method, $url, $params)

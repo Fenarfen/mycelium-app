@@ -28,11 +28,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/mastodon', 'mastodon');
-Route::view('/botlogin', 'bot-login');
-Route::view('/log', 'log');
-Route::view('/team-contact', 'team-contact');
-Route::view('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index']);
+Route::get('/mastodon', [App\Http\Controllers\MastodonController::class, 'index'])->name('mastodon');
+Route::get('/twitter', [App\Http\Controllers\TwitterController::class, 'index'])->name('twitter');
+Route::get('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index'])->name('social-media');
 
 Auth::routes();
 

@@ -6,7 +6,7 @@ class MastodonController extends Controller
 {
     function index()
     {
-        return view('mastodon', ['response' => $this->PostStatus()]);
+        return view('mastodon', ['response' => $this->MastodonPostStatus()]);
     }
 
     public function MastodonPostStatus()
@@ -16,7 +16,7 @@ class MastodonController extends Controller
         $response = \Illuminate\Support\Facades\Http::accept('application/json')->withHeaders([
             'Authorization' => 'Bearer ' . getenv('MASTODON_TEST_ACCESS')
         ])->post('https://mastodon.social/api/v1/statuses', [
-            'status' => 'hello from php',
+            'status' => 'hello from the mycelium-app!',
         ]);
 
         if (isset($response['id']))
