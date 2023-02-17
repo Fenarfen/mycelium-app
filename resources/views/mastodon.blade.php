@@ -1,5 +1,13 @@
-<div class="container">
-    <h1>
-        <?php echo $response; ?>
-    </h1>
-</div>
+<x-guest-layout>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <?php echo $response; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+</x-guest-layout>
