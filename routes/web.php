@@ -36,7 +36,7 @@ Route::get('/social-media', [App\Http\Controllers\SocialMediaController::class, 
 Route::get('/show/{id}', [App\Http\Controllers\SocialMediaController::class, 'show']);
 Route::get('/create', [App\Http\Controllers\SocialMediaController::class, 'create']);
 
-Route::get('/scrape', [App\Http\Controllers\ScrapeController::class, 'scrape']);
+Route::get('/scrape/{id}', [App\Http\Controllers\ScrapeController::class, 'scrape']);
 
 Auth::routes();
 
