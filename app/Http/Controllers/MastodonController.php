@@ -16,7 +16,7 @@ class MastodonController extends Controller
         $response = \Illuminate\Support\Facades\Http::accept('application/json')->withHeaders([
             'Authorization' => 'Bearer ' . getenv('MASTODON_TEST_ACCESS')
         ])->post('https://mastodon.social/api/v1/statuses', [
-            'status' => 'hello from the mycelium-app!',
+            'status' => 'Hello Tom!',
         ]);
 
         if (isset($response['id']))

@@ -47,7 +47,7 @@ class TwitterController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POSTFIELDS => '{
-                "text": "Hello World from mycelium-app5!"
+                "text": "Hello Tom!"
             }',
             CURLOPT_HTTPHEADER => array(
                 'Authorization: OAuth oauth_consumer_key="' . $twitter_test_consumer . '",oauth_token="' . $twitter_test_access_token . '",oauth_signature_method="HMAC-SHA1",oauth_timestamp="' . time() . '",oauth_nonce="' . time() . '",oauth_version="1.0",oauth_signature="' . $encodedSignature . '"',
