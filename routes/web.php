@@ -32,6 +32,12 @@ Route::get('/mastodon', [App\Http\Controllers\MastodonController::class, 'index'
 Route::get('/twitter', [App\Http\Controllers\TwitterController::class, 'index'])->name('twitter');
 Route::get('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index'])->name('social-media');
 
+Route::get('/social-media', [App\Http\Controllers\SocialMediaController::class, 'index']);
+Route::get('/show/{id}', [App\Http\Controllers\SocialMediaController::class, 'show']);
+Route::get('/create', [App\Http\Controllers\SocialMediaController::class, 'create']);
+
+Route::get('/scrape', [App\Http\Controllers\ScrapeController::class, 'scrape']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

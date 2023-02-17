@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 
 ini_set("display_errors", 1);
 
-use App\Model\SocialMedia;
+use App\Models\Team;
+use App\Models\TeamContact;
+use App\Traits\CreateTeamContact;
+use Illuminate\Http\Request;
 
 class SocialMediaController extends Controller
 {
@@ -98,5 +101,31 @@ class SocialMediaController extends Controller
             return "failure";
         else
             return "Error: no response";
+    }
+
+    /**
+     * Show the attribute for a given teams contanct details.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $team = Team::find($id);
+        $contacts = TeamContact::where('team_id', $team->id)->get();
+        return view('team-contact', [
+            'contacts' => $contacts,
+            'team' => $team
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+
+        $this->verifyAndCreateTeamContact(
+            $request->input('team_id'),
+            $request->input('handle'),
+            $request->input('website')
+        );
     }
 }

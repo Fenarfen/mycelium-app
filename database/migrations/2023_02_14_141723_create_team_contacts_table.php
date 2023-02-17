@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('team_id')->index();
             $table->string('handle');
             $table->string('website');
-            $table->date('contancted')->nullable();
+            $table->date('contacted')->nullable();
             $table->boolean('engagement')->nullable();
             $table->timestamps();
         });
