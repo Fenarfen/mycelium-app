@@ -4,32 +4,45 @@ namespace App\Http\Controllers;
 
 use Goutte\Client;
 use App\Models\Team;
-use App\Models\TeamContact;
+use Symfony\Component\DomCrawler\Crawler;
 use App\Traits\CreateTeamContact;
 
 class ScrapeController extends Controller
 {
     use CreateTeamContact;
 
-    public function scrape()
+    public function scrape($id)
     {
         $client = new Client();
-        // Only takes the frist team from the database to test with at the moment
-        $team = Team::all()->first(); 
+
+        // Gets the website of the company with that id
+        $team = Team::find($id); 
         $website = $team->website;
 
         $crawler = $client->request('GET', $website);
-            
-        $facebook_link = $crawler->filter('a[title="Facebook"]')->last()->attr('href');
-        $twitter_link = $crawler->filter('a[title="Twitter"]')->last()->attr('href');
+
+        // WIP: currently looks though every anchor on the html page and selects ones with strings of intrest
+        $crawler->filter('a')->each(function (Crawler $node) use (&$facebookUrl, &$twitterUrl, &$instagramUrl) {
+            $href = $node->attr('href');
+            if (strpos($href, 'facebook.com') !== false || strpos($href, 'fb.com') !== false) {
+                $facebookUrl = $href;
+            } else if (strpos($href, 'twitter.com') !== false) {
+                $twitterUrl = $href;
+            } else if (strpos($href, 'instagram.com') !== false) {
+                $instagramUrl = $href;
+            }
+        });
 
         $contacts = [];
 
         // Get the handles by taking a substring at the correct length
         // e.g. https://facebook.com/ is removed
-        $contacts[] = $this->verifyAndCreateTeamContact($team->id, substr($facebook_link, 25), $facebook_link);
-        $contacts[] = $this->verifyAndCreateTeamContact($team->id, substr($twitter_link, 20), $twitter_link);
+        $contacts[] = $this->verifyAndCreateTeamContact($team->id, trim(substr($facebookUrl, 25), '/'), $facebookUrl);
+        $contacts[] = $this->verifyAndCreateTeamContact($team->id, trim(substr($twitterUrl, 20), '/'), $twitterUrl);
+        $contacts[] = $this->verifyAndCreateTeamContact($team->id, trim(substr($instagramUrl, 26), '/'), $instagramUrl);
 
         return view('team-contact', ['team' => $team, 'contacts' => $contacts]);
     }
+
+
 }
