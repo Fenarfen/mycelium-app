@@ -1,4 +1,14 @@
 <x-guest-layout>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <title>My Laravel Project</title>
+  </head>
+  <body>
+    @include('navbar')
+    <div class="container">
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -78,3 +88,5 @@
         </div>
     </div>
 </x-guest-layout>
+</body>
+</html>
